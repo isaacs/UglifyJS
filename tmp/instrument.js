@@ -40,7 +40,7 @@ function instrument(code) {
                         // without the `analyzing' hack, w.walk(this) would re-enter here leading
                         // to infinite recursion
                         analyzing.push(this);
-                        ret = [ "block",
+                        ret = [ "splice",
                                 [ [ "stat", trace(this) ],
                                   w.walk(this) ]];
                         analyzing.pop(this);
@@ -93,7 +93,10 @@ function instrument(code) {
 
 ////// test code follows.
 
-var code = instrument(test.toString());
+var pre = test.toString();
+var code = instrument(pre);
+console.log(pre)
+console.log('/////////// instrumented:')
 console.log(code);
 
 function test() {
