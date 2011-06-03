@@ -110,11 +110,15 @@ function test() {
         const bar = 6, baz = 7;
 
         // switch block.  note we can't track case lines the same way.
-        switch ("foo") {
+        switch (foo) {
+            case "fallthrough": // should put a trace here to know which
+            case 5:             // case branch actually was triggered?
             case "foo":
                 return 1;
             case "bar":
                 return 2;
+            default:
+                return 100;
         }
 
         // for/for in
